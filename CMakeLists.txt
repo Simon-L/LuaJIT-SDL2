@@ -6,7 +6,9 @@ cmake_minimum_required(VERSION 3.13)
 set(SDL_STATIC OFF CACHE INTERNAL "dont build static!")
 
 add_subdirectory(SDL EXCLUDE_FROM_ALL)
-set_target_properties(SDL2 PROPERTIES OUTPUT_NAME "SDL2")
+if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+    set_target_properties(SDL2 PROPERTIES OUTPUT_NAME "SDL2")
+endif()
 
 add_custom_target(snd2_ffi ALL)
 add_dependencies(snd2_ffi SDL2)
